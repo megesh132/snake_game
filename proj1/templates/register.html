@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <script src="{% static 'js/bootstrap.bundle.min.js'%}"></script>
+    <link rel="icon" href="{% static 'img/logo.jpg'%}">
+    <style>
+        .nav-link {
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-secondary navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img src="{% static 'img/logo.jpg'%}" style="width: 4em;" alt="">
+            </a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#mymenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mymenu">
+                <ul class="navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">home page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">login</a>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-sm-6">
+            <img src="{% static 'img/rover.webp'%}" class="img img-thumbnail w-100" alt="">
+        </div>
+        <div class="col-sm-6">
+            <h1 style="font-family: 'Times New Roman', Times, serif;">Register</h1>
+
+            <form id="registerForm" action="insert" onsubmit="return validateForm()">
+                <span id="msg" style="color: red;"></span>
+                <div class="mb-3">
+                    <input name="fullname" id="fullnameid" class="form-control border border-3 border-black" type="text" placeholder="Fullname:">
+                </div>
+                <div class="mb-3">
+                    <input name="email" id="emailid" class="form-control border border-3 border-black,unique=True" type="text" placeholder="Email ID:">
+                </div>
+                <div class="mb-3">
+                    <input name="password" id="passwordid" class="form-control border border-3 border-black" type="password" placeholder="Password:">
+                </div>
+                <div class="mb-3">
+                    <input name="phone" id="phoneid" class="form-control border border-3 border-black" type="text" placeholder="Phone:">
+                </div>
+
+                <div class="mb-3">
+                    <textarea name="address" id="addressid" class="form-control border border-3 border-black" placeholder="Address"></textarea>
+                </div>
+
+                <div class="mb-2">
+                    <button class="btn btn-primary" type="submit">Register</button>
+                    <button class="btn bg-danger text-white" type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            let formValid = true;
+            const fields = ['fullnameid', 'emailid', 'passwordid', 'phoneid', 'addressid'];
+            let msgElement = document.getElementById('msg');
+            msgElement.textContent = '';
+
+            fields.forEach(function(field) {
+                let input = document.getElementById(field);
+                if (input.value.trim() === '') {
+                    formValid = false;
+                    msgElement.textContent = 'Please fill in all the fields.';
+                    input.classList.add('border-danger');
+                } else {
+                    input.classList.remove('border-danger');
+                }
+            });
+
+            return formValid;
+        }
+    </script>
+</body>
+
+</html>
